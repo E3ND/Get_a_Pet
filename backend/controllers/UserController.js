@@ -68,8 +68,12 @@ module.exports = class UserController {
         const { email, password } = req.body
 
         // Validations
-        if(!email || !password) {
-            res.status(422).json({ message: 'Preencha todos os campos.' })
+        if(!email) {
+            res.status(422).json({ message: 'Preencha campo e-mail.' })
+            return
+        }
+        if(!password) {
+            res.status(422).json({ message: 'Preencha campo senha.' })
             return
         }
 
