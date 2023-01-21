@@ -11,6 +11,7 @@ function Login() {
     const [ user, setUser ] = useState({})
     const { login } = useContext(Context)
 
+    // Pegadno o que é digitado
     function handleChange(e) {
         setUser({...user, [e.target.name]: e.target.value })
     }

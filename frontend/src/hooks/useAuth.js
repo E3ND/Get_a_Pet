@@ -38,6 +38,7 @@ export default function useAuth() {
             msgType = 'error'
         }
 
+        // Invocando flash messages
         setFlashMessage(msgText, msgType)
     }
 

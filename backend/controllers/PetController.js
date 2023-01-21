@@ -15,8 +15,24 @@ module.exports = class PetController {
         const available = true
 
         // Validações
-        if(!name || !age || !weight || !color || images.length === 0) {
-            res.status(422).json({ message: 'Os campos nome, idade, peso, cor e imagens, são obrigatórios!' })
+        if(!name) {
+            res.status(422).json({ message: 'O campos nome é obrigatório!' })
+            return
+        }
+        if(!age) {
+            res.status(422).json({ message: 'O campo idade é obrigatório!' })
+            return
+        }
+        if(!weight) {
+            res.status(422).json({ message: 'O campo peso é obrigatório!' })
+            return
+        }
+        if(!color) {
+            res.status(422).json({ message: 'O campo cor é obrigatório!' })
+            return
+        }
+        if(images.length === 0) {
+            res.status(422).json({ message: 'É necessário ao menos uma imagem!' })
             return
         }
 
@@ -33,7 +49,8 @@ module.exports = class PetController {
             images: [],
             user: {
                 _id: user._id,
-                name: user.image,
+                name: user.name,
+                image: user.image,
                 phone: user.phone
             },
         })
@@ -65,7 +82,7 @@ module.exports = class PetController {
         const user = await getUserByToken(token)
 
         //Filtrando os pets baseado no id do usuário
-        const pets = await Pet.find({ 'user._id': user._id }).sort('createdAt')
+        const pets = await Pet.find({ 'user._id': user._id }).sort('-createdAt')
 
         res.status(200).json({
             pets,
@@ -78,7 +95,7 @@ module.exports = class PetController {
         const user = await getUserByToken(token)
 
         //Filtrando os pets baseado no id do usuário
-        const pets = await Pet.find({ 'adopter._id': user._id }).sort('createdAt')
+        const pets = await Pet.find({ 'adopter._id': user._id }).sort('-createdAt')
 
         res.status(200).json({
             pets,
@@ -188,10 +205,7 @@ module.exports = class PetController {
             updatedData.color = color
         }
 
-        if(images.length === 0) {
-            res.status(422).json({ message: 'O campo imagem é obrigatório!' })
-            return
-        } else {
+        if(images.length > 0){
             updatedData.images = []
             images.map((image) => {
                 updatedData.images.push(image.filename)

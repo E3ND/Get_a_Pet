@@ -15,14 +15,28 @@ function Navbar() {
         <nav className={styles.navbar}>
             <div className={styles.navbar_logo}>
                 <img src={Logo} alt="Logo Get a Pet" />
-                <h2>Get a Pet</h2>
+                <Link to="/">
+                    <h2>Get A Pet</h2>
+                </Link>
             </div>
             <ul>
-                <li>
-                    <Link to="/">Adotar</Link>
-                </li>
                 {authenticated ? (
                         <>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/pet/myadoptions">Minhas adoções</Link>
+                        </li>
+                        <li>
+                            <Link to="/pet/add">Adotar</Link>
+                        </li>
+                        <li>
+                            <Link to="/pet/mypets">Meus Pets</Link>
+                        </li>
+                        <li>
+                            <Link to="/user/profile">Perfil</Link>
+                        </li>
                         <li onClick={logout}>Sair</li>
                         </>
                     ) : 

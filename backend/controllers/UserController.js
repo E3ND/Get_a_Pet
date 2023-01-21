@@ -13,24 +13,24 @@ module.exports = class UserController {
 
         // Validations
         if(!name) {
-            res.status(422).json({ message: 'O campo nome é obrigatório!.' })
+            res.status(422).json({ message: 'O campo nome é obrigatório!' })
             return
         }
         if(!email) {
-            res.status(422).json({ message: 'O campo e-mail é obrigatório!.' })
+            res.status(422).json({ message: 'O campo e-mail é obrigatório!' })
             return
         }
         if(!phone) {
-            res.status(422).json({ message: 'O campo telefone é obrigatório!.' })
+            res.status(422).json({ message: 'O campo telefone é obrigatório!' })
             return
         }
         if(!password) {
-            res.status(422).json({ message: 'O campo senha é obrigatório!.' })
+            res.status(422).json({ message: 'O campo senha é obrigatório!' })
             return
         }
 
         if(password !== confirmpassword) {
-            res.status(422).json({ message: 'As senhas não coincidem.' })
+            res.status(422).json({ message: 'As senhas não coincidem!' })
             return
         }
 
@@ -38,7 +38,7 @@ module.exports = class UserController {
         const userExists = await User.findOne({ email: email })
 
         if(userExists) {
-            res.status(422).json({ message: 'E-mail já cadastrado, utilize outro e-mail.' })
+            res.status(422).json({ message: 'E-mail já cadastrado, utilize outro e-mail!' })
             return
         }
 
@@ -153,8 +153,18 @@ module.exports = class UserController {
         }
 
         // ValidationsgetUserByToken
-        if(!name || !email || !phone) {
-            res.status(422).json({ message: 'Preencha todos os campos.' })
+        if(!name) {
+            res.status(422).json({ message: 'O campo nome é obrigatório!' })
+            return
+        }
+
+        if(!email) {
+            res.status(422).json({ message: 'O campo email é obrigatório!' })
+            return
+        }
+
+        if(!phone) {
+            res.status(422).json({ message: 'O campo telefone é obrigatório!' })
             return
         }
 
